@@ -1,0 +1,65 @@
+{
+  "name": "modern-image-inspector",
+  "displayName": "Modern Image Inspector",
+  "description": "Inspect image compression potential and convert images to WebP or AVIF directly in VS Code.",
+  "version": "1.0.0",
+  "publisher": "ovcharovcoder",
+  "engines": {
+    "vscode": "^1.81.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ovcharovcoder/modern-image-inspector"
+  },
+  "homepage": "https://github.com/ovcharovcoder/modern-image-inspector",
+  "bugs": {
+    "url": "https://github.com/ovcharovcoder/modern-image-inspector/issues"
+  },
+  "icon": "extension/icon.png",
+  "license": "MIT",
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:imageInspector.open"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "imageInspector.open",
+        "title": "Open Image Inspector"
+      }
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "command": "imageInspector.open",
+          "when": "resourceExtname =~ /\\.(png|jpg|jpeg)$/"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p .",
+    "watch": "tsc -watch -p ."
+  },
+  "dependencies": {
+    "sharp": "^0.33.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.3.0",
+    "@types/vscode": "^1.81.0"
+  },
+  "keywords": [
+    "image",
+    "inspector",
+    "compression",
+    "optimizer",
+    "webp",
+    "avif",
+    "vs code",
+    "extension"
+  ]
+}
