@@ -16,6 +16,10 @@
 - 🔍 **Quick Preview** — Simple, clean Webview for inspecting images without leaving VS Code.
 - 🛡️ **Safe & Native** — Uses local encoding via Sharp; secure Webview with theme adaptation.
 
+### Screenshot
+
+![Modern Image Inspector Interface](https://raw.githubusercontent.com/ovcharovcoder/modern-image-inspector/main/images/1.png)
+
 ---
 
 ## 🛠 Installation
