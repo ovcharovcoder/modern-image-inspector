@@ -19,10 +19,10 @@ export function activate(context: vscode.ExtensionContext) {
         }
 
         try {
-          // Аналіз зображення
+          // Image analysis
           const infoRaw = await analyzeImage(uri.fsPath);
 
-          // Забезпечуємо числа для width, height і hasAlpha
+          // We provide numbers for width, height and hasAlpha
           const info = {
             width: infoRaw.width ?? 0,
             height: infoRaw.height ?? 0,
@@ -32,12 +32,12 @@ export function activate(context: vscode.ExtensionContext) {
             colorSpace: infoRaw.colorSpace ?? 'unknown',
           };
 
-          // Читаємо файл як Buffer для оцінки стиснення
+          // Reading the file as a Buffer to evaluate compression
           const buffer = fs.readFileSync(uri.fsPath);
           const webpSize = await estimateWebPSize(buffer);
           const avifSize = await estimateAvifSize(buffer);
 
-          // Створюємо Webview
+          // Creating a Webview
           const panel = vscode.window.createWebviewPanel(
             'imageInspector',
             `Image Inspector: ${path.basename(uri.fsPath)}`,
@@ -56,7 +56,7 @@ export function activate(context: vscode.ExtensionContext) {
             avifSize
           );
 
-          // Обробка повідомлень з Webview
+          // Handling messages from Webview
           panel.webview.onDidReceiveMessage(async msg => {
             try {
               if (msg.command === 'saveWebP') {
@@ -103,3 +103,4 @@ export function activate(context: vscode.ExtensionContext) {
 }
 
 export function deactivate() {}
+
