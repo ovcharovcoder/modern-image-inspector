@@ -87,7 +87,7 @@ Released under the [MIT License](https://github.com/yourusername/modern-image-in
 
 **Install dependencies**
 
-`npm install`
+`npm install` <br>
 Installs all required dependencies, including sharp, which is used for local image processing.
 
 **Build the extension**
