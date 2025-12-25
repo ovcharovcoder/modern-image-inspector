@@ -19,7 +19,7 @@
 
 ### Screenshot
 
-![Modern Image Inspector Interface](https://raw.githubusercontent.com/ovcharovcoder/modern-image-inspector/main/images/1.mp4)
+![Modern Image Inspector Interface](https://raw.githubusercontent.com/ovcharovcoder/modern-image-inspector/main/images/1.gif)
 
 ---
 
