@@ -86,10 +86,12 @@ Released under the [MIT License](https://github.com/yourusername/modern-image-in
 - VS Code 1.81+
 
 **Install dependencies**
+
 `npm install`
 Installs all required dependencies, including sharp, which is used for local image processing.
 
 **Build the extension**
+
 `npm run package`
 
   This command will:
