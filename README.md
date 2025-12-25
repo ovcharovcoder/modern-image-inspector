@@ -87,7 +87,7 @@ Released under the [MIT License](https://github.com/ovcharovcoder/modern-image-i
 
 **Install & Build**
 1. Download the project
-2. To build, use the following commands:
+2. To build, use the following commands:<br>
 `npm install` <br>
 `npm run package`
 
