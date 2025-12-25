@@ -2,7 +2,7 @@
   "name": "modern-image-inspector",
   "displayName": "Modern Image Inspector",
   "description": "Inspect image compression potential and convert images to WebP or AVIF directly in VS Code.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "publisher": "ovcharovcoder",
   "engines": {
     "vscode": "^1.81.0"
@@ -41,16 +41,20 @@
     }
   },
   "scripts": {
+    "clean": "rimraf dist",
     "compile": "tsc -p .",
-    "watch": "tsc -watch -p ."
+    "build": "npm run clean && npm run compile",
+    "watch": "tsc -watch -p .",
+    "package": "npm run build && npm prune --production && vsce package"
   },
   "dependencies": {
     "sharp": "^0.33.0"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",
+    "@types/vscode": "^1.81.0",
     "typescript": "^5.3.0",
-    "@types/vscode": "^1.81.0"
+    "rimraf": "^5.0.5"
   },
   "keywords": [
     "image",
