@@ -46,7 +46,7 @@ To inspect an image:
 ## 🧩 Contributing
 
 Found a bug or want to suggest an improvement?  
-Open an issue or pull request on [GitHub](https://github.com/yourusername/modern-image-inspector).
+Open an issue or pull request on [GitHub](https://github.com/ovcharovcoder/modern-image-inspector).
 
 ---
 
@@ -57,7 +57,6 @@ Open an issue or pull request on [GitHub](https://github.com/yourusername/modern
   alt="Andriy Ovcharov"
   width="60"
 />
-
 
 Andriy Ovcharov  
 📧 ovcharovcoder@gmail.com
@@ -73,27 +72,4 @@ If you enjoy Modern Image Inspector, consider supporting the author:
 
 ## 🪪 License
 
-Released under the [MIT License](https://github.com/ovcharovcoder/modern-image-inspector/blob/main/LICENSE.md)
-
----
-
-## 🧑‍💻 Development & Build
-
-**Requirements**
-
-- Node.js 18+
-- npm 9+
-- VS Code 1.81+
-
-**Install dependencies**
-
-`npm install` <br>
-Installs all required dependencies, including sharp, which is used for local image processing.
-
-**Build the extension**
-
-`npm run package`
-
-  This command will:
-- remove the existing dist folder
-- compile TypeScript sources into dist
+Released under the [MIT License](https://github.com/ovcharovcoder/modern-image-inspector/blob/main/LICENSE)
