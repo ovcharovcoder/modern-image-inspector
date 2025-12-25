@@ -1,13 +1,21 @@
 import sharp from 'sharp';
 
-export async function estimateWebPSave(buffer: Buffer) {
-  const webpBuffer = await sharp(buffer).webp({ quality: 75 }).toBuffer();
-  const sizeKB = (webpBuffer.length / 1024).toFixed(2);
-  return { buffer: webpBuffer, sizeKB };
+/**
+ * Оцінює розмір файлу після конвертації у WebP
+ * @param buffer - буфер оригінального зображення
+ * @returns розмір у KB
+ */
+export async function estimateWebPSize(buffer: Buffer): Promise<number> {
+  const data = await sharp(buffer).webp({ quality: 75 }).toBuffer();
+  return +(data.length / 1024).toFixed(2);
 }
 
-export async function estimateAvifSave(buffer: Buffer) {
-  const avifBuffer = await sharp(buffer).avif({ quality: 50 }).toBuffer();
-  const sizeKB = (avifBuffer.length / 1024).toFixed(2);
-  return { buffer: avifBuffer, sizeKB };
+/**
+ * Оцінює розмір файлу після конвертації у AVIF
+ * @param buffer - буфер оригінального зображення
+ * @returns розмір у KB
+ */
+export async function estimateAvifSize(buffer: Buffer): Promise<number> {
+  const data = await sharp(buffer).avif({ quality: 50 }).toBuffer();
+  return +(data.length / 1024).toFixed(2);
 }
