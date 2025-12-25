@@ -73,7 +73,7 @@ If you enjoy Modern Image Inspector, consider supporting the author:
 
 ## 🪪 License
 
-Released under the [MIT License](https://github.com/yourusername/modern-image-inspector/blob/main/LICENSE.md)
+Released under the [MIT License](https://github.com/ovcharovcoder/modern-image-inspector/blob/main/LICENSE.md)
 
 ---
 
