@@ -10,7 +10,7 @@
 
 ## ✨ Features
 
-- 🖼 **Image Inspection** — Open PNG or JPG files and see dimensions, color space, alpha channel, and file size.
+- 🖼 **Image Inspection** — Open PNG or JPG files and see dimensions and file size.
 - 📊 **Compression Estimation** — Shows estimated size if converted to WebP (q75) or AVIF (q50).
 - 🛠 **Convert & Save** — Save the current image as WebP or AVIF with one click.
 - 🔍 **Quick Preview** — Simple, clean Webview for inspecting images without leaving VS Code.
