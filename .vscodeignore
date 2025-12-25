@@ -1,0 +1,6 @@
+.vscode/**
+src/**
+.git/**
+*.ts
+tsconfig.json
+README.dev.md
