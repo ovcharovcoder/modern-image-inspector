@@ -3,6 +3,11 @@
 All notable changes to the Modern Image Inspector VS Code extension will be documented in this file.
 <br>
 
+## [1.0.2–1.0.4] - 2025-12-25
+### Fixed
+- Bug fixes and internal code improvements.
+- Stability and reliability enhancements.
+
 ## [1.0.1] - 2025-12-25
 ### Changed
 - Improved extension description and documentation.
