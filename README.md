@@ -73,3 +73,21 @@ If you enjoy Modern Image Inspector, consider supporting the author:
 ## 🪪 License
 
 Released under the [MIT License](https://github.com/ovcharovcoder/modern-image-inspector/blob/main/LICENSE)
+
+--- 
+
+## 🧑‍💻 Development & Build
+
+**Requirements**
+
+- Node.js 18+
+- npm 9+
+- VS Code 1.81+
+
+
+**Install & Build**
+1. Download the project
+2. To build, use the following commands:
+`npm install` <br>
+`npm run package`
+
