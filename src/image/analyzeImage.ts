@@ -7,14 +7,14 @@ export async function analyzeImage(filePath: string) {
 
   // Фактичний розмір файлу у байтах
   const stats = fs.statSync(filePath);
-  const sizeKB = (stats.size / 1024).toFixed(2);
+  const sizeKB = stats.size / 1024;
 
   return {
-    width: meta.width,
-    height: meta.height,
+    width: meta.width ?? 0, // якщо undefined, ставимо 0
+    height: meta.height ?? 0, // якщо undefined, ставимо 0
     format: meta.format?.toUpperCase() || 'UNKNOWN',
-    sizeKB, // Цей параметр передаємо у Webview
-    hasAlpha: meta.hasAlpha,
-    colorSpace: meta.space,
+    sizeKB, // число, а не рядок
+    hasAlpha: meta.hasAlpha ?? false,
+    colorSpace: meta.space || 'unknown',
   };
 }
