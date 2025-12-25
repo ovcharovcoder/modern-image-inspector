@@ -2,90 +2,104 @@ import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs';
 import { analyzeImage } from './image/analyzeImage';
-import { estimateWebPSave, estimateAvifSave } from './image/estimateSize';
-import { saveAsWebP, saveAsAvif } from './image/convertImage';
+import { convertToWebP, convertToAvif } from './image/convertImage';
+import { estimateWebPSize, estimateAvifSize } from './image/estimateSize';
 import { getInspectorHtml } from './webview/inspectorHtml';
 
 export function activate(context: vscode.ExtensionContext) {
-  const disposable = vscode.commands.registerCommand(
-    'imageInspector.open',
-    async (uri: vscode.Uri) => {
-      try {
-        if (!uri) {
-          const selected = await vscode.window.showOpenDialog({
-            canSelectMany: false,
-            filters: { Images: ['png', 'jpg', 'jpeg'] },
-          });
-          if (!selected || selected.length === 0) return;
-          uri = selected[0];
+  context.subscriptions.push(
+    vscode.commands.registerCommand(
+      'imageInspector.open',
+      async (uri: vscode.Uri) => {
+        if (!uri || !fs.existsSync(uri.fsPath)) {
+          vscode.window.showErrorMessage(
+            'Image Inspector: No file selected or file does not exist.'
+          );
+          return;
         }
 
-        const filePath = uri.fsPath;
-        const fileBuffer = fs.readFileSync(filePath);
+        try {
+          // Аналіз зображення
+          const infoRaw = await analyzeImage(uri.fsPath);
 
-        // Отримуємо інформацію про зображення
-        const info = await analyzeImage(filePath);
+          // Забезпечуємо числа для width, height і hasAlpha
+          const info = {
+            width: infoRaw.width ?? 0,
+            height: infoRaw.height ?? 0,
+            format: infoRaw.format,
+            sizeKB: infoRaw.sizeKB,
+            hasAlpha: infoRaw.hasAlpha ?? false,
+            colorSpace: infoRaw.colorSpace ?? 'unknown',
+          };
 
-        // Оцінка розміру після конвертації
-        const webp = await estimateWebPSave(fileBuffer);
-        const avif = await estimateAvifSave(fileBuffer);
+          // Читаємо файл як Buffer для оцінки стиснення
+          const buffer = fs.readFileSync(uri.fsPath);
+          const webpSize = await estimateWebPSize(buffer);
+          const avifSize = await estimateAvifSize(buffer);
 
-        const panel = vscode.window.createWebviewPanel(
-          'imageInspector',
-          'Image Inspector',
-          vscode.ViewColumn.One,
-          {
-            enableScripts: true,
-            localResourceRoots: [vscode.Uri.file(path.dirname(filePath))],
-          }
-        );
+          // Створюємо Webview
+          const panel = vscode.window.createWebviewPanel(
+            'imageInspector',
+            `Image Inspector: ${path.basename(uri.fsPath)}`,
+            vscode.ViewColumn.Beside,
+            {
+              enableScripts: true,
+              localResourceRoots: [vscode.Uri.file(path.dirname(uri.fsPath))],
+            }
+          );
 
-        // HTML для Webview
-        panel.webview.html = getInspectorHtml(
-          panel,
-          filePath,
-          info,
-          webp.sizeKB,
-          avif.sizeKB
-        );
+          panel.webview.html = getInspectorHtml(
+            panel,
+            uri.fsPath,
+            info,
+            webpSize,
+            avifSize
+          );
 
-        // Обробка повідомлень від Webview (кнопки збереження)
-        panel.webview.onDidReceiveMessage(async message => {
-          if (message.command === 'saveWebP') {
-            const savePath = await vscode.window.showSaveDialog({
-              defaultUri: vscode.Uri.file(
-                filePath.replace(/\.[^.]+$/, '.webp')
-              ),
-            });
-            if (savePath) {
-              await saveAsWebP(fileBuffer, savePath.fsPath);
-              vscode.window.showInformationMessage(
-                `Saved as WebP: ${savePath.fsPath}`
+          // Обробка повідомлень з Webview
+          panel.webview.onDidReceiveMessage(async msg => {
+            try {
+              if (msg.command === 'saveWebP') {
+                const outputPath = await vscode.window.showSaveDialog({
+                  defaultUri: vscode.Uri.file(
+                    uri.fsPath.replace(/\.[^/.]+$/, '.webp')
+                  ),
+                  filters: { WebP: ['webp'] },
+                });
+                if (outputPath) {
+                  await convertToWebP(uri.fsPath, outputPath.fsPath);
+                  vscode.window.showInformationMessage(
+                    `Saved WebP: ${outputPath.fsPath}`
+                  );
+                }
+              } else if (msg.command === 'saveAvif') {
+                const outputPath = await vscode.window.showSaveDialog({
+                  defaultUri: vscode.Uri.file(
+                    uri.fsPath.replace(/\.[^/.]+$/, '.avif')
+                  ),
+                  filters: { AVIF: ['avif'] },
+                });
+                if (outputPath) {
+                  await convertToAvif(uri.fsPath, outputPath.fsPath);
+                  vscode.window.showInformationMessage(
+                    `Saved AVIF: ${outputPath.fsPath}`
+                  );
+                }
+              }
+            } catch (err: any) {
+              vscode.window.showErrorMessage(
+                `Image Inspector error: ${err.message}`
               );
             }
-          } else if (message.command === 'saveAvif') {
-            const savePath = await vscode.window.showSaveDialog({
-              defaultUri: vscode.Uri.file(
-                filePath.replace(/\.[^.]+$/, '.avif')
-              ),
-            });
-            if (savePath) {
-              await saveAsAvif(fileBuffer, savePath.fsPath);
-              vscode.window.showInformationMessage(
-                `Saved as AVIF: ${savePath.fsPath}`
-              );
-            }
-          }
-        });
-      } catch (err: any) {
-        vscode.window.showErrorMessage(
-          `Image Inspector error: ${err.message || err}`
-        );
+          });
+        } catch (err: any) {
+          vscode.window.showErrorMessage(
+            `Image Inspector error: ${err.message}`
+          );
+        }
       }
-    }
+    )
   );
-
-  context.subscriptions.push(disposable);
 }
 
 export function deactivate() {}
