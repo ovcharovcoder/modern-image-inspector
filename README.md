@@ -1,8 +1,8 @@
 # Modern Image Inspector
 
-[![VS Code Marketplace](https://img.shields.io/visual-studio-marketplace/v/yourpublishername.modern-image-inspector?color=blue)](https://marketplace.visualstudio.com/items?itemName=yourpublishername.modern-image-inspector)
-[![GitHub Stars](https://img.shields.io/github/stars/yourusername/modern-image-inspector?color=yellow)](https://github.com/yourusername/modern-image-inspector)
-[![License](https://img.shields.io/badge/license-MIT-green)](https://github.com/yourusername/modern-image-inspector/blob/main/LICENSE.md)
+[![VS Code Marketplace](https://img.shields.io/visual-studio-marketplace/v/ovcharovcoder.modern-image-inspector?color=blue)](https://marketplace.visualstudio.com/items?itemName=ovcharovcoder.modern-image-inspector)
+[![GitHub Stars](https://img.shields.io/github/stars/ovcharovcoder/modern-image-inspector?color=yellow)](https://github.com/ovcharovcoder/modern-image-inspector)
+[![License](https://img.shields.io/badge/license-MIT-green)](https://github.com/ovcharovcoder/modern-image-inspector/blob/main/LICENSE)
 
 > Modern Image Inspector — Inspect image compression potential and convert images to WebP or AVIF directly in VS Code.
 
