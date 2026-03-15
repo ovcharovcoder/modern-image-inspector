@@ -56,10 +56,10 @@ Open an issue or pull request on [GitHub](https://github.com/ovcharovcoder/moder
 <img 
   src="https://raw.githubusercontent.com/ovcharovcoder/modern-image-inspector/main/images/avatar.png"
   alt="Andriy Ovcharov"
-  width="80"
+  width="60"
 />
 
-Andriy Ovcharov  
+Andriy Ovcharov<br>  
 📧 ovcharovcoder@gmail.com
 
 ---
