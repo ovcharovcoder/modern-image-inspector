@@ -59,7 +59,7 @@ Open an issue or pull request on [GitHub](https://github.com/ovcharovcoder/moder
   width="60"
 />
 
-Andriy Ovcharov
+Andriy Ovcharov<br>
 📧 ovcharovcoder@gmail.com
 
 ---
